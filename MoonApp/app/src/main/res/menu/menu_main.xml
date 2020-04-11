@@ -3,34 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.MoonApp.MainActivity">
     <item
-        android:id="@+id/algorithm"
-        android:title="Algorytm">
-        <menu>
-            <item
-                android:id="@+id/simple"
-                android:title="Simple" />
-            <item
-                android:id="@+id/conway"
-                android:title="Conway" />
-            <item
-                android:id="@+id/trig1"
-                android:checkable="false"
-                android:title="Trig1" />
-            <item
-                android:id="@+id/trig2"
-                android:title="Trig2" />
-        </menu>
-    </item>
-    <item
-        android:id="@+id/hemisphere"
-        android:title="Półkula">
-        <menu>
-            <item
-                android:id="@+id/N"
-                android:title="północna" />
-            <item
-                android:id="@+id/S"
-                android:title="południowa" />
-        </menu>
-    </item>
+        android:id="@+id/settings"
+        android:title="Ustawienia" />
 </menu>

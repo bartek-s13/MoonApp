@@ -1,5 +1,7 @@
 package com.example.MoonApp
-
+import android.os.Build
+import androidx.annotation.RequiresApi
+import java.time.LocalDate
 import java.util.*
 import kotlin.math.round
 
@@ -11,15 +13,15 @@ class Calculator(var year:Int, var month:Int, var day:Int, var algorithm:Algorit
     var moon_day:Int = 0
 
     init {
-        Calculate()
+        moon_day = Calculate(this.year, this.month, this.day)
     }
 
-    fun Calculate(){
+    fun Calculate(year:Int, month:Int, day:Int):Int{
         when(this.algorithm){
-            Algorithm.SIMPLE -> this.moon_day = Simple(this.year, this.month, this.day)
-            Algorithm.CONWAY -> this.moon_day = Conway(this.year, this.month, this.day)
-            Algorithm.TRIG1 -> this.moon_day = Trig1(this.year, this.month, this.day)
-            Algorithm.TRIG2 -> this.moon_day = Trig2(this.year, this.month, this.day)
+            Algorithm.SIMPLE -> return Simple(year, month, day)
+            Algorithm.CONWAY -> return Conway(year, month, day)
+            Algorithm.TRIG1 -> return Trig1(year, month, day)
+            Algorithm.TRIG2 -> return Trig2(year, month, day)
         }
     }
 
@@ -127,9 +129,19 @@ class Calculator(var year:Int, var month:Int, var day:Int, var algorithm:Algorit
         return round(moon_day*100/30.0).toString()
     }
 
+
     fun nextFull():String{
         //https://programuj.pl/blog/java-daty-calendar
-        var current = this.moon_day+1
-        return ""
+        var current_day = LocalDate.of(this.year,this.month,this.day)
+        var current = this.moon_day
+
+        while(current!=15){
+            current_day = current_day.plusDays(1)
+            current = Calculate(current_day.year, current_day.monthValue, current_day.dayOfMonth)
+        }
+        return String.format("%d.%d.%d r.", current_day.getDayOfMonth(), current_day.monthValue, current_day.year)
+
     }
+
+
 }
