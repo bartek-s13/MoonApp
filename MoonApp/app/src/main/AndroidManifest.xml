@@ -11,14 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".FullMoonsActivity"></activity>
+        <activity
+            android:name=".BaseActivity"
+            android:label="@string/title_activity_base"
+             />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings">
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
-        </activity>
-        <!--
-        <activity android:name=".settings" />
-        <activity android:name=".Settings" /> -->
+
+
         <activity
             android:name=".MainActivity"
             android:label="MoonApp"

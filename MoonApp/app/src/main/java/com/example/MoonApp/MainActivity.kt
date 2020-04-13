@@ -11,11 +11,13 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import kotlinx.android.synthetic.main.activity_main.*
 import java.time.LocalDate
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+
 
     var cal:Calculator? = null
     var hemisphere:String = "north"
@@ -25,14 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        var today = LocalDate.now()
-        this.cal = Calculator(today.year, today.monthValue, today.dayOfMonth, this.algorithm)
-        show()
-        setSupportActionBar(toolbar)
-
-
-    }
-
+        val today = LocalDate.now()/*
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -46,6 +41,16 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return true
+    }
+
+
+ */
+        this.cal = Calculator(today.year, today.monthValue, today.dayOfMonth, this.algorithm)
+        show()
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+
     }
 
     fun show(){
@@ -80,8 +85,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun goToSettings(){
-        val intent = Intent(this, SettingsActivity::class.java)
+    fun goToFullMoons(v:View){
+        val intent = Intent(this, FullMoonsActivity::class.java)
         startActivityForResult(intent,997)
     }
 
