@@ -1,0 +1,39 @@
+<resources>
+
+    <string-array name="algorithms">
+        <item>Simple</item>
+        <item>Conway</item>
+        <item>Trig1</item>
+        <item>Trig2</item>
+    </string-array>
+
+    <string-array name="algorithms_val">
+        <item>SIMPLE</item>
+        <item>CONWAY</item>
+        <item>TRIG1</item>
+        <item>TRIG2</item>
+    </string-array>
+
+    <string-array name="hemispheres">
+        <item>północna</item>
+        <item>południowa</item>
+    </string-array>
+
+    <string-array name="hemispheres_val">
+        <item>N</item>
+        <item>S</item>
+    </string-array>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
+
+
+</resources>
+

@@ -36,11 +36,9 @@ class Calculator(var year:Int, var month:Int, var day:Int, var algorithm:Algorit
         cal.set(1970,0,7,20,35,0)
         val new_moon = cal.getTimeInMillis()
         val lp = 2551443
-        //val now = Date(year, month-1, day, 20,35,0)
-        //val new_moon =Date(1970,0,7,20,35,0)
         val phase  = ((now- new_moon)/1000) % lp
         val phase_day = Math.floor(phase.toDouble() / (24 * 3600)) + 1
-        return phase_day.toInt()
+        return phase_day.toInt() %30 //zmiana, bez której wyniki są w przedziale od 1 do 30 (z informacji na stronie wynika, że wyniki pownny być w przedziale od 0 do 29)
     }
 
     fun Conway(year:Int, month:Int, day:Int):Int{
@@ -131,7 +129,7 @@ class Calculator(var year:Int, var month:Int, var day:Int, var algorithm:Algorit
 
 
     fun nextFull():String{
-        //https://programuj.pl/blog/java-daty-calendar
+
         var current_day = LocalDate.of(this.year,this.month,this.day)
         var current = this.moon_day
 
@@ -141,6 +139,21 @@ class Calculator(var year:Int, var month:Int, var day:Int, var algorithm:Algorit
         }
         return String.format("%d.%d.%d r.", current_day.getDayOfMonth(), current_day.monthValue, current_day.year)
 
+    }
+
+    fun lastNew():String{
+        var current_day = LocalDate.of(this.year,this.month,this.day)
+        current_day = current_day.minusDays(1)
+        var current = Calculate(current_day.year, current_day.monthValue, current_day.dayOfMonth)
+
+        while(current!=0){
+            current_day = current_day.minusDays(1)
+            current = Calculate(current_day.year, current_day.monthValue, current_day.dayOfMonth)
+            println("$current")
+        }
+
+
+        return String.format("%d.%d.%d r.", current_day.getDayOfMonth(), current_day.monthValue, current_day.year)
     }
 
 
