@@ -156,5 +156,6 @@ class Calculator(var year:Int, var month:Int, var day:Int, var algorithm:Algorit
         return String.format("%d.%d.%d r.", current_day.getDayOfMonth(), current_day.monthValue, current_day.year)
     }
 
+    TODO Dodać parsowanie wyniku next full, tak żeby next full działało lepiej w full moons activity
 
 }
