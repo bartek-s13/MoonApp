@@ -1,12 +1,13 @@
 package com.example.MoonApp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import kotlinx.android.synthetic.main.activity_full_moons.*
+import java.time.LocalDate
 
 
 class FullMoonsActivity : BaseActivity() {
@@ -30,10 +31,12 @@ class FullMoonsActivity : BaseActivity() {
                     year.setText("1900")
                     y=1900
                 }
-                else if(input>2100){
-                    year.setText("2100")
-                    y=2100
+                else if(input>2200){
+                    year.setText("2200")
+                    y=2200
                 }
+                y = input
+                getFullMoons()
                 ignore = false
             }
 
@@ -48,6 +51,7 @@ class FullMoonsActivity : BaseActivity() {
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+        getFullMoons()
     }
     fun onPlus(v: View){
         y++
@@ -60,8 +64,28 @@ class FullMoonsActivity : BaseActivity() {
     }
 
     fun getFullMoons(){
-        val cal = Calculator(y-1,12,31, Algorithm.TRIG1)
+        var textFields = arrayOf<Int>(
+            R.id.fullMoon1,
+            R.id.fullMoon2,
+            R.id.fullMoon3,
+            R.id.fullMoon4,
+            R.id.fullMoon5,
+            R.id.fullMoon6,
+            R.id.fullMoon7,
+            R.id.fullMoon8,
+            R.id.fullMoon9,
+            R.id.fullMoon10,
+            R.id.fullMoon11,
+            R.id.fullMoon12,
+            R.id.fullMoon13
+        )
 
+        val cal = Calculator(Algorithm.TRIG1)
+        var values = cal.getYearFullMoons(y)
+        for(j in 0..textFields.size-1){
+            var text_field = findViewById<TextView>(textFields[j])
+            text_field.text = values[j]
+        }
     }
 
 }

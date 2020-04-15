@@ -4,17 +4,17 @@
     android:visibility="visible">
 
     <ListPreference
-        android:defaultValue="Trig1"
+        android:defaultValue="TRIG1"
         android:entries="@array/algorithms"
         android:entryValues="@array/algorithms_val"
-        android:key="list_preference_1"
+        android:key="Algorithm"
         android:title="Algorytmy"
         app:useSimpleSummaryProvider="true" />
     <ListPreference
         android:defaultValue="północna"
         android:entries="@array/hemispheres"
         android:entryValues="@array/hemispheres_val"
-        android:key="list_preference_2"
+        android:key="Hemisphere"
         android:title="Półkula"
         app:useSimpleSummaryProvider="true" />
 

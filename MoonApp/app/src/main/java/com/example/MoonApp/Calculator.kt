@@ -1,20 +1,27 @@
 package com.example.MoonApp
 import android.os.Build
-import androidx.annotation.RequiresApi
+import java.time.format.DateTimeFormatter
 import java.time.LocalDate
 import java.util.*
 import kotlin.math.round
+import kotlin.io.println
 
 enum class Algorithm {
     SIMPLE, CONWAY, TRIG1, TRIG2
 }
 
-class Calculator(var year:Int, var month:Int, var day:Int, var algorithm:Algorithm) {
+class Calculator( @JvmField var algorithm:Algorithm) {
     var moon_day:Int = 0
+    var year: Int = 0
+    var month:Int = 0
+    var day:Int = 0
 
-    init {
+    constructor(date:LocalDate, algorithm:Algorithm):this(algorithm){
+        setMyDate(date)
         moon_day = Calculate(this.year, this.month, this.day)
     }
+
+
 
     fun Calculate(year:Int, month:Int, day:Int):Int{
         when(this.algorithm){
@@ -25,7 +32,11 @@ class Calculator(var year:Int, var month:Int, var day:Int, var algorithm:Algorit
         }
     }
 
-
+    fun setMyDate(new_date:LocalDate){
+        this.year = new_date.year
+        this.month = new_date.monthValue
+        this.day = new_date.dayOfMonth
+    }
 
 
     fun Simple(year:Int, month:Int, day:Int):Int{
@@ -50,6 +61,7 @@ class Calculator(var year:Int, var month:Int, var day:Int, var algorithm:Algorit
         val r_d =r.toDouble() - (if (year<2000)  4.0 else  8.3)
         var phase_day = Math.floor(r_d + 0.5) %30
         if(phase_day<0){phase_day+=30}
+
         return phase_day.toInt()
     }
 
@@ -124,21 +136,28 @@ class Calculator(var year:Int, var month:Int, var day:Int, var algorithm:Algorit
     }
 
     fun getPercent():String{
-        return round(moon_day*100/30.0).toString()
+        var x = round(moon_day.toDouble()*10000/30.0)
+        x/=100
+        return x.toString()
     }
 
 
-    fun nextFull():String{
+    fun nextFull():LocalDate{
 
         var current_day = LocalDate.of(this.year,this.month,this.day)
         var current = this.moon_day
 
         while(current!=15){
+
             current_day = current_day.plusDays(1)
             current = Calculate(current_day.year, current_day.monthValue, current_day.dayOfMonth)
         }
-        return String.format("%d.%d.%d r.", current_day.getDayOfMonth(), current_day.monthValue, current_day.year)
+        return current_day
+    }
 
+    fun nextFullString():String{
+        val nextFull = nextFull()
+        return parseData(nextFull)+ " r."
     }
 
     fun lastNew():String{
@@ -149,13 +168,38 @@ class Calculator(var year:Int, var month:Int, var day:Int, var algorithm:Algorit
         while(current!=0){
             current_day = current_day.minusDays(1)
             current = Calculate(current_day.year, current_day.monthValue, current_day.dayOfMonth)
-            println("$current")
+
         }
 
 
-        return String.format("%d.%d.%d r.", current_day.getDayOfMonth(), current_day.monthValue, current_day.year)
+        return parseData(current_day)+ " r."
     }
 
-    TODO Dodać parsowanie wyniku next full, tak żeby next full działało lepiej w full moons activity
+    fun parseData(date: LocalDate): String{
+        val format = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val formattedDate = format.format(date)
+        return formattedDate
+    }
 
+    fun getYearFullMoons(y:Int):Array<String>{
+        var currentDay = LocalDate.of(y,1,1)
+        var values = Array(13){i -> ""}
+
+        var i = 0
+        while(currentDay < LocalDate.of(y+1,1,1)){
+            var currentMoonDay = Calculate(currentDay.year, currentDay.monthValue, currentDay.dayOfMonth)
+            if(currentMoonDay ==15){
+                values[i] = parseData(currentDay)
+                i++
+            }
+            currentDay = currentDay.plusDays(1)
+        }
+
+        return values
+    }
+
+    fun setAlgorithm(newAlgorithm: Algorithm){
+        this.algorithm = newAlgorithm
+        this.moon_day = Calculate(this.year, this.month, this.day)
+    }
 }

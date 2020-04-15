@@ -32,6 +32,7 @@ class SettingsActivity : AppCompatActivity() {
         if (id == android.R.id.home) {
             val data = Intent()
             setResult(123, data)
+
             super.finish()
         }
         return super.onOptionsItemSelected(item)
@@ -43,6 +44,7 @@ class SettingsActivity : AppCompatActivity() {
     class SettingsFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
+
         }
     }
 }
