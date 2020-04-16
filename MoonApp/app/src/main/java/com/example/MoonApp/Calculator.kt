@@ -21,8 +21,6 @@ class Calculator( @JvmField var algorithm:Algorithm) {
         moon_day = Calculate(this.year, this.month, this.day)
     }
 
-
-
     fun Calculate(year:Int, month:Int, day:Int):Int{
         when(this.algorithm){
             Algorithm.SIMPLE -> return Simple(year, month, day)
@@ -43,7 +41,6 @@ class Calculator( @JvmField var algorithm:Algorithm) {
         val cal = Calendar.getInstance()
         cal.set(year, month-1, day, 20,35,0)
         val now = cal.getTimeInMillis()
-
         cal.set(1970,0,7,20,35,0)
         val new_moon = cal.getTimeInMillis()
         val lp = 2551443
@@ -61,7 +58,6 @@ class Calculator( @JvmField var algorithm:Algorithm) {
         val r_d =r.toDouble() - (if (year<2000)  4.0 else  8.3)
         var phase_day = Math.floor(r_d + 0.5) %30
         if(phase_day<0){phase_day+=30}
-
         return phase_day.toInt()
     }
 
@@ -74,7 +70,6 @@ class Calculator( @JvmField var algorithm:Algorithm) {
             jy--
             jm += 12
         }
-
         var jul_day = Math.floor(365.25 * jy) + Math.floor(30.6001 * jm) + day + 1720995
         if (day+31*(month+12*year) >= (15+31*(10+12*1582))) {
             val ja = Math.floor(0.01 * jy);
@@ -136,19 +131,15 @@ class Calculator( @JvmField var algorithm:Algorithm) {
     }
 
     fun getPercent():String{
-        var x = round(moon_day.toDouble()*10000/30.0)
-        x/=100
-        return x.toString()
+        val x = round(moon_day.toDouble()*100/30.0).toInt()
+        return "$x%"
     }
 
 
     fun nextFull():LocalDate{
-
         var current_day = LocalDate.of(this.year,this.month,this.day)
         var current = this.moon_day
-
         while(current!=15){
-
             current_day = current_day.plusDays(1)
             current = Calculate(current_day.year, current_day.monthValue, current_day.dayOfMonth)
         }
@@ -164,14 +155,10 @@ class Calculator( @JvmField var algorithm:Algorithm) {
         var current_day = LocalDate.of(this.year,this.month,this.day)
         current_day = current_day.minusDays(1)
         var current = Calculate(current_day.year, current_day.monthValue, current_day.dayOfMonth)
-
         while(current!=0){
             current_day = current_day.minusDays(1)
             current = Calculate(current_day.year, current_day.monthValue, current_day.dayOfMonth)
-
         }
-
-
         return parseData(current_day)+ " r."
     }
 
@@ -183,18 +170,16 @@ class Calculator( @JvmField var algorithm:Algorithm) {
 
     fun getYearFullMoons(y:Int):Array<String>{
         var currentDay = LocalDate.of(y,1,1)
-        var values = Array(13){i -> ""}
-
+        val values = Array(13){i -> ""}
         var i = 0
         while(currentDay < LocalDate.of(y+1,1,1)){
-            var currentMoonDay = Calculate(currentDay.year, currentDay.monthValue, currentDay.dayOfMonth)
-            if(currentMoonDay ==15){
+            val currentMoonDay = Calculate(currentDay.year, currentDay.monthValue, currentDay.dayOfMonth)
+            if(currentMoonDay == 15){
                 values[i] = parseData(currentDay)
                 i++
             }
             currentDay = currentDay.plusDays(1)
         }
-
         return values
     }
 

@@ -6,38 +6,39 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_full_moons.*
 import java.time.LocalDate
 
 
 class FullMoonsActivity : BaseActivity() {
     var y = 2020
+    var algorithm:Algorithm = Algorithm.TRIG1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_full_moons)
-
         year.setText(y.toString())
-        year.addTextChangedListener(object : TextWatcher {
-            var ignore = false
-            override fun afterTextChanged(s: Editable) {
-                val input = s.toString().toInt()
-                if(ignore || s.length <4 ){
-                    y = input
-                    return}
-                ignore = true
 
-                if(input < 1900){
+        year.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {
+                if(s.toString().isEmpty() ){
+                    return
+                   }
+                y = s.toString().toInt()
+                if(s.length <4 ){
+                    return}
+
+                if(y < 1900){
                     year.setText("1900")
                     y=1900
                 }
-                else if(input>2200){
+                else if(y>2200){
                     year.setText("2200")
                     y=2200
                 }
-                y = input
                 getFullMoons()
-                ignore = false
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int,
@@ -53,6 +54,7 @@ class FullMoonsActivity : BaseActivity() {
         setSupportActionBar(toolbar)
         getFullMoons()
     }
+
     fun onPlus(v: View){
         y++
         year.setText(y.toString())
@@ -64,7 +66,7 @@ class FullMoonsActivity : BaseActivity() {
     }
 
     fun getFullMoons(){
-        var textFields = arrayOf<Int>(
+        val textFields = arrayOf<Int>(
             R.id.fullMoon1,
             R.id.fullMoon2,
             R.id.fullMoon3,
@@ -80,12 +82,22 @@ class FullMoonsActivity : BaseActivity() {
             R.id.fullMoon13
         )
 
-        val cal = Calculator(Algorithm.TRIG1)
-        var values = cal.getYearFullMoons(y)
+        val cal = Calculator(this.algorithm)
+        val values = cal.getYearFullMoons(y)
         for(j in 0..textFields.size-1){
-            var text_field = findViewById<TextView>(textFields[j])
+            val text_field = findViewById<TextView>(textFields[j])
             text_field.text = values[j]
         }
+    }
+
+    override fun onResume(){
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val new_algorithm = Algorithm.valueOf(preferences.getString("Algorithm", "TRIG1")!!)
+        if(this.algorithm != new_algorithm){
+            this.algorithm = new_algorithm
+            getFullMoons()
+        }
+        super.onResume()
     }
 
 }

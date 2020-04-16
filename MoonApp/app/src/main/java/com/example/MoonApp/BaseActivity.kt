@@ -27,9 +27,4 @@ open class BaseActivity : AppCompatActivity() {
         return true
     }
 
-    fun goToSettings(){
-        val intent = Intent(this, SettingsActivity::class.java)
-        startActivityForResult(intent,997)
-    }
-
 }

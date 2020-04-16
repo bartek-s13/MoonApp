@@ -20,6 +20,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fullMoon5" />
 
@@ -30,6 +31,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fullMoon4" />
 
@@ -40,6 +42,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fullMoon6" />
 
@@ -50,6 +53,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fullMoon7" />
 
@@ -60,6 +64,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fullMoon3" />
 
@@ -71,7 +76,8 @@
             android:layout_marginTop="24dp"
             android:text="TextView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fullMoon2" />
+            app:layout_constraintTop_toBottomOf="@+id/fullMoon2"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/plus"
@@ -80,10 +86,11 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/roundedbutton"
-            android:backgroundTint="#0C9F92"
+            android:backgroundTint="@color/colorMint"
             android:gravity="center"
             android:onClick="onPlus"
             android:text="+"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -121,10 +128,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/roundedbutton"
-            android:backgroundTint="#0C9F92"
+            android:backgroundTint="@color/colorMint"
             android:gravity="center"
             android:onClick="onMinus"
             android:text="—"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/plus"
             app:layout_constraintHorizontal_bias="0.5"
@@ -138,6 +146,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/year" />
 
@@ -148,6 +157,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fullMoon1" />
 
@@ -158,6 +168,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fullMoon8" />
 
@@ -168,6 +179,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fullMoon11" />
 
@@ -178,6 +190,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fullMoon10" />
 
@@ -188,6 +201,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fullMoon9" />
 
@@ -198,6 +212,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fullMoon12" />
 
